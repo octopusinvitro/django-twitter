@@ -1,0 +1,55 @@
+image: python:3.10.0-alpine3.15
+
+services:
+  - postgres:12.2-alpine
+
+variables:
+  POSTGRES_DB: django_twitter_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ''
+  POSTGRES_HOST_AUTH_METHOD: trust
+
+# Change pip's cache directory to be inside the project directory since we can
+# only cache local items.
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - python --version
+  - export DATABASE_URL=postgres://postgres:@postgres:5432/django_twitter_test
+  - apt update && sudo apt install python3-dev libpq-dev gettext
+  - pip install --upgrade pip && pip --version
+  - pip install pipenv && pipenv --version
+  - pip install virtualenv
+  - virtualenv venv && source venv/bin/activate
+  - pipenv install && pipenv install --dev
+  - . bin/migrate
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+
+stages:
+  - test
+  - linter
+
+unittest:
+  stage: test
+  script:
+    - export CC_TEST_REPORTER_ID=5ef30c83827d1e7812647465472e858e9aea6e1c74998930a427f212a5a3a08f
+    - chmod +x ./cc-test-reporter
+    - ./cc-test-reporter before-build
+    - coverage run --source='webapp' ./manage.py test --shuffle ; coverage json
+    - ./cc-test-reporter after-build
+
+flake8:
+  stage: linter
+  script:
+    - . bin/lint

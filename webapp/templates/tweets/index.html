@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include '_messages_success.html' %}
+  <!-- <ul>
+    <li class="message-success">
+      {% include 'icon_success.svg' %}Your tweet was created. <a href="/tweets/4">See it here</a>.
+    </li>
+    <li class="message-success">
+      {% include 'icon_success.svg' %}Your tweet was created. <a href="/tweets/4">See it here</a>.
+    </li>
+  </ul> -->
+
+  <h2 class="list-page__heading">Recent tweets</h2>
+
+  <ul id="tweets-list" class="tweets-list">{% for presenter in tweets %}
+    <li class="tweets-list__item">
+      <article class="tweet">
+        {% include 'tweets/_tweet.html' %}
+      </article>
+    </li>{% endfor %}
+  </ul>
+{% endblock %}

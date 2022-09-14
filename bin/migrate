@@ -1,0 +1,5 @@
+#!/bin/bash
+
+clear
+pipenv run ./manage.py makemigrations $1
+pipenv run ./manage.py migrate

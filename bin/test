@@ -1,0 +1,9 @@
+#!/bin/bash
+
+clear
+if [ -z $1 ]; then
+  coverage run --source='webapp' ./manage.py test --shuffle --keepdb ; coverage html ; firefox htmlcov/index.html
+else
+  $path = ${1%.*}
+  coverage run --source='webapp' ./manage.py test --shuffle --keepdb ${path/\/.}
+fi

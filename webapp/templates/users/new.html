@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+  <article>
+    <h2 class="single-page__heading">New User</h2>
+    {% include '_form_error.html' %}
+    {% include 'users/_form.html' %}
+  </article>
+{% endblock %}

@@ -1,0 +1,5 @@
+  {% if messages %}<ul>{% for message in messages %}{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <li class="message-error{% if message.tags %} {{ message.tags }}{% endif %}">
+      {% include 'icon_error.svg' %}{{ message|safe }}
+    </li>{% endif %}{% endfor %}
+  </ul>{% endif %}

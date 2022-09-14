@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <article>
+    <h2 class="single-page__heading">Edit user @{{ request.user.username }}</h2>
+    {% include '_messages_error.html' %}
+    {% include '_form_error.html' %}
+    {% include 'users/_form.html' %}
+  </article>
+{% endblock %}

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+clear
+pipenv run flake8 *.py django_twitter webapp --max-line-length=100 --exclude=webapp/migrations

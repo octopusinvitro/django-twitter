@@ -1,0 +1,20 @@
+<header>
+      <a class="tweet-header__user" href="{% url 'users_show' username=presenter.username %}">
+        <img class="tweet-header__avatar" src="{{ presenter.avatar_url }}" width="64" height="64" alt="{{ presenter.username}}'s' avatar picture">
+        <h3 class="tweet-header__username">{{ presenter.display_name }}</h3>
+        <p class="tweet-header__handle">@{{ presenter.username }}</p>
+      </a>
+    </header>
+
+    <p>{{ presenter.message }}</p>
+
+    {% if presenter.has_image %}<a class="tweet-body__attachment" href="{{ presenter.image_url }}">
+      <img src="{{ presenter.image_url }}" width="{{ presenter.image_width }}" height="{{ presenter.image_height }}" alt="{{ presenter.image_alt_text }}">
+    </a>{% endif %}
+
+    <footer class="tweet-footer">
+      <a class="tweet-footer__date" href="{% url 'tweets_show' id=presenter.id %}">Published: <time>{{ presenter.created_at }}</time></a>
+      <button class="{{ presenter.button_class }}" data-id="{{ presenter.id }}">
+        {% include 'heart.svg' %}<span>{{ presenter.likes }}</span>
+      </button>
+    </footer>

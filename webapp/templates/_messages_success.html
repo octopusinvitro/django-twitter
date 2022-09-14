@@ -1,0 +1,5 @@
+  {% if messages %}<ul>{% for message in messages %}{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <li class="message-success{% if message.tags %} {{ message.tags }}{% endif %}">
+      {% include 'icon_success.svg' %}{{ message|safe }}
+    </li>{% endif %}{% endfor %}
+  </ul>{% endif %}

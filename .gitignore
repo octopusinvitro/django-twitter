@@ -1,0 +1,10 @@
+env
+venv
+htmlcov
+.coverage
+.ipynb_checkpoints
+*/locale/**/*.mo
+webapp/static/images/uploads/attachments
+webapp/static/images/uploads/avatars
+webapp/tests/fixtures/uploads/attachments
+webapp/tests/fixtures/uploads/avatars

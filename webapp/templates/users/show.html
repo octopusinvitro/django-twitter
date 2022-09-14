@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include '_messages_success.html' %}
+
+  <article class="single-page__box">
+    <header>
+      <a class="tweet-header__user" href="{% url 'users_show' username=user.username %}">
+        <img class="tweet-header__avatar" src="{{ user.avatar.url }}" width="64" height="64" alt="{{ user.username}}'s' avatar picture">
+        <h3 class="tweet-header__username">{{ user.display_name }}</h3>
+        <p class="tweet-header__handle">@{{ user.username }}</p>
+      </a>
+      {% if user.is_authenticated %}<a href="{% url 'users_edit' %}">Edit profile</a>{% endif %}
+    </header>
+  </article>
+
+  <article>
+    <h2 class="list-page__heading">Recent tweets</h2>
+
+    <ul id="tweets-list" class="tweets-list">{% for presenter in tweets %}
+      <li class="tweets-list__item">
+        <article class="tweet">
+          {% include 'tweets/_tweet.html' %}
+        </article>
+      </li>{% endfor %}
+    </ul>
+  </article>
+{% endblock %}

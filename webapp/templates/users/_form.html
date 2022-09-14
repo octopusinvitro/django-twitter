@@ -1,0 +1,17 @@
+    <!-- <section class="message-error">
+      {% include 'icon_error.svg' %}
+      <h3 class="message__title">Error:</h3>
+    </section> -->
+
+    <form class="single-page__box" enctype="multipart/form-data"  action="{{ action }}" method="POST">
+      <!-- <ul class="errorlist">
+        <li>message
+          <ul class="errorlist">
+            <li>This field is required.</li>
+          </ul>
+        </li>
+      </ul> -->
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="submit">
+    </form>

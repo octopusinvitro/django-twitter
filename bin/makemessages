@@ -1,0 +1,5 @@
+#!/bin/bash
+
+clear
+pipenv run ./manage.py makemessages --all --ignore=bin --ignore=django_twitter --ignore=htmlcov --ignore=*/migrations --ignore=*/static --ignore=*/tests --ignore=manage.py
+pipenv run ./manage.py compilemessages

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <article>
+    <h2 class="single-page__heading">Login</h2>
+    {% include '_messages_success.html' %}
+    {% include '_messages_error.html' %}
+    {% include '_form_error.html' %}
+
+    <form class="single-page__box" action="/users/authentication" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="submit">
+    </form>
+  </article>
+{% endblock %}
